@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SmartHome | Dashboard</title>
+  <style>
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: #f8f9fa; 
+      margin: 0; 
+    }
+
+    /* NAVBAR */
+    
+      nav {
+            background: rgba(76, 110, 245, 0.85);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid white;
+            z-index: 1000;
+        }
+
+    nav .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .logout-btn {
+      background: #fa5252;
+      padding: 8px 16px;
+      border-radius: 6px;
+    }
+
+    /* CARD STYLES */
+    .container {
+      text-align: center; 
+      padding: 30px; 
+    }
+
+    .card {
+      background: white; 
+      display: inline-block; 
+      margin: 15px; 
+      padding: 20px; 
+      border-radius: 10px; 
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
+      width: 200px; 
+    }
+
+    /* MOBILE MENU */
+    @media(max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        background: #4c6ef5;
+        position: absolute;
+        top: 65px;
+        right: 0;
+        width: 200px;
+        display: none;
+        padding: 20px;
+      }
+
+      nav .menu-btn {
+        display: block;
+      }
+    }
+
+    nav .menu-btn {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+   /* LINE FOOTER */
+.line-footer {
+  background: #4c6ef5;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.footer-links li a {
+  text-decoration: none;
+  color:white;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer-links li a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #4c6ef5;
+  transition: 0.3s;
+}
+
+.footer-links li a:hover::after {
+  width: 100%; /* underline animation */
+}
+
+.copy {
+  font-size: 14px;
+  color: white;
+  margin-top: 8px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+
+  /* Background image */
+  background: url('/static/images/home_back.webp') no-repeat center center fixed;
+  background-size: cover;
+
+  /* Dark overlay for readability */
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.55); /* dark blur */
+  backdrop-filter: blur(4px);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  background: rgba(76, 110, 245, 0.85);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid white;
+}
+
+/* Container */
+.container {
+  text-align: center;
+  padding: 30px;
+  color: white;
+}
+
+/* Cards */
+.card {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  display: inline-block;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  width: 200px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Navbar links */
+.logout {
+  background: #fa5252;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+ /* FOOTER */
+    footer {
+      background: rgba(255,255,255,0.1);
+      border-top: 2px solid #ffffff;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+      color: white;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 0;
+      margin-bottom: 10px;
+    }
+
+    .footer-links li a {
+      text-decoration: none;
+      color: white;
+      position: relative;
+    }
+
+    .footer-links li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    .footer-links li a:hover::after {
+      width: 100%;
+    }
+
+.copy {
+  font-size: 14px;
+  color: #ddd;
+  margin-top: 8px;
+}
+
+
+  </style>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">🏡 SmartHome</div>
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <ul id="navMenu">
+      <li><a href="{% url 'weather' %}">weather</a></li>  
+      <li><a href="{% url 'sensors' %}">Sensors</a></li>
+      <li><a href="{% url 'controls' %}">Controls</a></li>
+      <li><a href="{% url 'report' %}">Reports</a></li>
+      <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <h3>Welcome, {{ request.user.username }}</h3>
+    <h4>Live Sensor Data</h4>
+
+    <div id="sensor-cards">
+        {% for name, value in sensors.items %}
+            <div class="card">
+                <h4>{{ name }}</h4>
+                <p>{{ value }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h3 style="margin-top:40px;">Recent IoT Updates</h3>
+</div>
+
+   <!-- FOOTER -->
+  <footer>
+    <ul class="footer-links">
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'privacy' %}">Privacy</a></li>
+      <li><a href="{% url 'help' %}">Help</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+
+    <p class="copy">© 2025 SmartHome | All Rights Reserved</p>
+  </footer>
+
+ <script>
+function updateSensorSection() {
+    fetch("{% url 'home' %}", {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.text())
+    .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Only update sensor cards
+        const newCards = doc.querySelectorAll('.card');
+        const container = document.querySelector('.container');
+
+        if (newCards.length > 0 && container) {
+            const oldCards = container.querySelectorAll('.card');
+
+            oldCards.forEach(card => card.remove());
+            newCards.forEach(card => container.appendChild(card));
+        }
+    })
+    .catch(err => console.error("Live update error:", err));
+}
+
+// Refresh every 5 seconds
+setInterval(updateSensorSection, 5000);
+</script>
+
+
+</body>
+</html>

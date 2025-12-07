@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact | SmartHome</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url("{% static 'images/home_back.webp' %}") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(3px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.12);
+      padding: 30px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 20px 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 15px;
+    }
+
+    button {
+      background: #ffe066;
+      color: black;
+      font-weight: bold;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ffdd44;
+    }
+
+    /* NAVBAR */
+    nav {
+        background: rgba(76, 110, 245, 0.85);
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        position: sticky;
+        top: 0;
+        border-bottom: 2px solid white;
+        z-index: 1000;
+    }
+
+    nav .logo {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+    .logout-btn {
+        background: #fa5252;
+    }
+
+    /* SUCCESS MESSAGE */
+    .success-box {
+      background: rgba(0, 200, 0, 0.2);
+      color: #90ee90;
+      padding: 12px;
+      border-left: 4px solid lightgreen;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+        background: rgba(255,255,255,0.1);
+        border-top: 2px solid #ffffff;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 40px;
+        color: white;
+    }
+
+    .footer-links {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .footer-links li a {
+        text-decoration: none;
+        color: white;
+        position: relative;
+    }
+
+    .footer-links li a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: white;
+        transition: 0.3s;
+    }
+
+    .footer-links li a:hover::after {
+        width: 100%;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">Contact me</div>
+
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'weather' %}">Weather</a></li>
+        <li><a href="{% url 'sensors' %}">Sensors</a></li>
+        <li><a href="{% url 'controls' %}">Controls</a></li>
+        <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+  <h2>Contact Us</h2>
+  <p style="text-align:center;">Have questions, issues, or feedback? Send us a message below.</p>
+
+  {% if status == "success" %}
+  <div class="success-box">
+    ✔ Your message has been sent successfully!
+  </div>
+  {% endif %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Your Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Your Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <br><br>
+
+  <h3 style="color:#ffe066;">📩 Other Ways to Contact</h3>
+  <p><b>Email:</b> support@smarthome.com</p>
+  <p><b>Phone:</b> +91 98765 43210</p>
+  <p><b>Address:</b> SmartHome HQ, New Delhi, India</p>
+
+</div>
+
+<footer>
+    <ul class="footer-links">
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'privacy' %}">Privacy</a></li>
+        <li><a href="{% url 'help' %}">Help</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+
+    <p>© 2025 SmartHome | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

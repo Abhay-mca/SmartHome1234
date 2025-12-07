@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IoT Dashboard</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { padding: 10px; text-align: center; border: 1px solid #ccc; }
+    th { background: #007bff; color: white; }
+  </style>
+</head>
+<body>
+  <h2>IoT Sensor Data</h2>
+  <table>
+    <tr>
+      <th>Sensor Type</th>
+      <th>Value</th>
+      <th>Unit</th>
+      <th>Time</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+      <td>{{ item.sensor_type }}</td>
+      <td>{{ item.value }}</td>
+      <td>{{ item.unit }}</td>
+      <td>{{ item.created_at }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No data yet</td></tr>
+    {% endfor %}
+  </table>
+  <br>
+  <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+</body>
+</html>

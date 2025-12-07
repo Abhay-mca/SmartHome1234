@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartHome | Sensors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/static/images/home_back.webp') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            color: white;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(4px);
+            z-index: -1;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: rgba(76, 110, 245, 0.85);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid white;
+            z-index: 1000;
+        }
+
+        nav .logo { font-size: 22px; font-weight: bold; }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover { background: rgba(255,255,255,0.2); }
+        .logout-btn { background: #fa5252; }
+
+        /* HEADINGS */
+        h2 { text-align: center; margin-top: 30px; font-size: 32px; color: #fff; }
+
+        /* SENSOR CARDS */
+        #sensor-container {
+            width: 90%;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .sensor-card {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            backdrop-filter: blur(8px);
+            transition: 0.3s;
+        }
+
+        .sensor-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .sensor-card .icon { font-size: 50px; }
+        .sensor-card .value { font-size: 30px; margin-top: 10px; font-weight: bold; }
+        .sensor-card .name { font-size: 18px; margin-top: 5px; color: #e0e0e0; }
+
+        /* FOOTER */
+        footer {
+            background: rgba(255,255,255,0.1);
+            border-top: 2px solid #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        .footer-links li a {
+            text-decoration: none;
+            color: white;
+            position: relative;
+        }
+
+        .footer-links li a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .footer-links li a:hover::after { width: 100%; }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">📡 SmartHome Sensors</div>
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'weather' %}">Weather</a></li>
+        <li><a href="{% url 'sensors' %}">Sensors</a></li>
+        <li><a href="{% url 'controls' %}">Controls</a></li>
+        <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
+    </ul>
+</nav>
+
+<h2>Live IoT Sensor Data</h2>
+
+<!-- Sensor Cards -->
+<div id="sensor-container">
+    <div class="sensor-card">
+        <div class="icon">🌡️</div>
+        <div class="value" id="temp">-- °C</div>
+        <div class="name">Temperature</div>
+    </div>
+    <div class="sensor-card">
+        <div class="icon">💧</div>
+        <div class="value" id="hum">-- %</div>
+        <div class="name">Humidity</div>
+    </div>
+    <div class="sensor-card">
+        <div class="icon">⚠️</div>
+        <div class="value" id="smoke">--</div>
+        <div class="name">Gas / Smoke</div>
+    </div>
+    <div class="sensor-card">
+    <div class="icon">☀️</div>
+    <div class="value" id="light">--</div>
+    <div class="name">Light (LDR)</div>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <ul class="footer-links">
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'privacy' %}">Privacy</a></li>
+        <li><a href="{% url 'help' %}">Help</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+    <p class="copy">© 2025 SmartHome | All Rights Reserved</p>
+</footer>
+
+<!-- AJAX for live updates -->
+<script>
+function updateSensors() {
+    fetch("/api/esp32/")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("temp").innerText = data.Temperature + " °C";
+            document.getElementById("hum").innerText = data.Humidity + " %";
+            document.getElementById("smoke").innerText = data.Smoke;
+
+            // ✅ NEW: LDR value
+            document.getElementById("light").innerText = data.Light;
+        })
+        .catch(err => console.error("Error fetching sensor data:", err));
+}
+
+setInterval(updateSensors, 5000);
+window.onload = updateSensors;
+</script>
+
+
+</body>
+</html>

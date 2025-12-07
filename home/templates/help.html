@@ -1,0 +1,258 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Help | SmartHome</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url("{% static 'images/home_back.webp' %}") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(3px);
+      z-index: -1;
+    }
+
+           /* NAVBAR */
+        nav {
+            background: rgba(76, 110, 245, 0.85);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid white;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .logout-btn {
+            background: #fa5252;
+        }
+
+        /* PAGE TITLE */
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 32px;
+            color: white;
+        }
+
+        /* CONTROL GRID */
+        .control-grid {
+            width: 90%;
+            margin: 20px auto 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .control-card {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .control-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .control-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .btn-toggle {
+            background: #4c6ef5;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn-toggle.off {
+            background: #fa5252;
+        }
+
+        .btn-toggle:hover {
+            opacity: 0.8;
+        }
+
+    
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.12);
+      padding: 30px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .faq h3 {
+      margin-top: 20px;
+      color: #ffe066;
+    }
+
+    
+
+     /* FOOTER */
+        footer {
+            background: rgba(255,255,255,0.1);
+            border-top: 2px solid #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        .footer-links li a {
+            text-decoration: none;
+            color: white;
+            position: relative;
+        }
+
+        .footer-links li a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .footer-links li a:hover::after {
+            width: 100%;
+        }
+
+    a { 
+      color: #ffe066; 
+      text-decoration: none; 
+    }
+    a:hover { text-decoration: underline; }
+  </style>
+
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">Help & Support</div>
+
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'weather' %}">Weather</a></li>
+        <li><a href="{% url 'sensors' %}">Sensors</a></li>
+        <li><a href="{% url 'controls' %}">Controls</a></li>
+        <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+  <h2>Help & Support</h2>
+  <p>Welcome to the SmartHome help center. Below are the most common questions and solutions.</p>
+
+  <div class="faq">
+
+    <h3>📌 1. How to add a new IoT Device?</h3>
+    <p>Go to Dashboard → Add Device → Enter device type & name → Save.</p>
+
+    <h3>📌 2. My sensor data is not updating?</h3>
+    <p>Check internet connection, restart the device, or re-register it in your dashboard.</p>
+
+    <h3>📌 3. How do I reset my password?</h3>
+    <p>Use “Forgot Password” → Enter your registered mobile → OTP verification.</p>
+
+    <h3>📌 4. OTP not coming?</h3>
+    <ul>
+        <li>Check your mobile network.</li>
+        <li>Wait 1–2 minutes.</li>
+        <li>Try resending OTP.</li>
+    </ul>
+
+    <h3>📌 5. How can I control appliances?</h3>
+    <p>Open Dashboard → Select device → On/Off or Automation mode.</p>
+
+    <h3>📌 Need More Help?</h3>
+    <p>Email us at: <b>support@smarthome.com</b></p>
+
+  </div>
+
+</div>
+
+<footer>
+    <ul class="footer-links">
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'privacy' %}">Privacy</a></li>
+        <li><a href="{% url 'help' %}">Help</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+
+    <p class="copy">© 2025 SmartHome | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

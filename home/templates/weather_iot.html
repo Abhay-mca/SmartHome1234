@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SmartHome | Weather</title>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('/static/images/home_back.webp') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+      z-index: -1;
+    }
+
+     /* NAVBAR */
+        nav {
+            background: rgba(76, 110, 245, 0.85);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid white;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .logout-btn {
+            background: #fa5252;
+        }
+
+        /* SENSOR CARDS */
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 32px;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(6px);
+            color: white;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 45px;
+        }
+
+        .value {
+            font-size: 28px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .name {
+            font-size: 20px;
+            margin-top: 5px;
+        }
+    /* FOOTER */
+    footer {
+      background: rgba(255,255,255,0.1);
+      border-top: 2px solid #ffffff;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+      color: white;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 0;
+      margin-bottom: 10px;
+    }
+
+    .footer-links li a {
+      text-decoration: none;
+      color: white;
+      position: relative;
+    }
+
+    .footer-links li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    .footer-links li a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">☁ Weather</div>
+
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'weather' %}">Weather</a></li>
+        <li><a href="{% url 'sensors' %}">Sensors</a></li>
+        <li><a href="{% url 'controls' %}">Controls</a></li>
+        <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN WEATHER SECTION -->
+  <div class="container">
+
+    <h2>📊 Weather Forecast for {{ city }}</h2>
+
+    {% if error %}
+      <div class="weather-card">
+        <h3>⚠ Unable to fetch weather data</h3>
+        <p>{{ error }}</p>
+      </div>
+
+    {% else %}
+      {% for day in forecast %}
+        <div class="weather-card">
+          <h3>Day {{ forloop.counter }}</h3>
+
+          <p><b>🌡 Temp:</b> {{ day.temp.day }}°C</p>
+          <p><b>🌙 Min:</b> {{ day.temp.min }}°C | <b>🔥 Max:</b> {{ day.temp.max }}°C</p>
+          <p><b>💧 Humidity:</b> {{ day.humidity }}%</p>
+          <p><b>🌬 Wind:</b> {{ day.speed }} m/s</p>
+          <p><b>⛅ Condition:</b> {{ day.weather.0.description }}</p>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <ul class="footer-links">
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'privacy' %}">Privacy</a></li>
+      <li><a href="{% url 'help' %}">Help</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+
+    <p class="copy">© 2025 SmartHome | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

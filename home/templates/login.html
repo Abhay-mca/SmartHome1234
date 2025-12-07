@@ -1,0 +1,392 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartHome | Secure Login</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      
+      /* Updated Background Image */
+      /* Make sure you put the uploaded image in your static/images folder! */
+      background: url("{% static 'images/vecteezy_smart-home-security-system-with-digital-shield-protection_69634787.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      overflow: hidden;
+      
+      /* KEY FOR 3D: Establishes the 3D space */
+      perspective: 1000px; 
+    }
+
+    /* Dark Overlay - Adjusted opacity for the new image */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6); /* Slightly darker to make the shield image pop */
+      backdrop-filter: blur(3px); /* Lower blur so you can see the cool background details */
+      z-index: -1;
+    }
+
+    /* The 3D Container */
+    .box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 50px 40px;
+      border-radius: 20px;
+      text-align: center;
+      width: 360px;
+      
+      /* Glassmorphism */
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+
+      /* 3D Properties */
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateY(0deg);
+      transition: transform 0.1s ease-out;
+      position: relative;
+    }
+
+    /* 3D Depth for Child Elements */
+    
+    h2 {
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transform: translateZ(50px);
+        text-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    }
+
+    form {
+        transform: translateZ(30px);
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      margin: 12px 0;
+      outline: none;
+      color: white;
+      font-size: 15px;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    input:focus {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #ffe066;
+        transform: scale(1.05);
+    }
+
+    button {
+      width: 100%;
+      background: #ffe066; 
+      color: #333;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: 0.3s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      transform: translateZ(40px);
+    }
+
+    button:hover { 
+        background: #fab005; 
+        box-shadow: 0 0 20px #ffe066;
+    }
+
+    .footer-text {
+        margin-top: 30px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        transform: translateZ(20px);
+    }
+
+    a { 
+        color: #ffe066; 
+        text-decoration: none; 
+        font-weight: 600;
+        display: inline-block;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #fff;
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+        .box {
+            transform: none !important;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box" id="tilt-box">
+    <h2>SmartHome Login</h2>
+    
+    <form method="POST">
+      {% csrf_token %}
+      
+      <input type="text" name="username" placeholder="Username" required autocomplete="username">
+      <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+      
+      <button type="submit">Login</button>
+    </form>
+    
+    <p class="footer-text">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+  </div>
+
+  <script>
+    const box = document.getElementById("tilt-box");
+
+    document.addEventListener("mousemove", (e) => {
+        const x = (window.innerWidth / 2 - e.pageX) / 25; // Adjusted sensitivity
+        const y = (window.innerHeight / 2 - e.pageY) / 25;
+
+        box.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+
+    document.addEventListener("mouseleave", () => {
+        box.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    });
+  </script>
+
+</body>
+</html> -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartHome | Secure Login</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      /* Background Image */
+      background: url("{% static 'images/vecteezy_smart-home-security-system-with-digital-shield-protection_69634787.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      overflow: hidden;
+      
+      /* KEY FOR 3D: Establishes the 3D space */
+      perspective: 1000px; 
+    }
+
+    /* Dark Overlay */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6); 
+      backdrop-filter: blur(4px);
+      z-index: -1;
+    }
+
+    /* The 3D Container */
+    .box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px 40px;
+      border-radius: 20px;
+      text-align: center;
+      width: 360px;
+      
+      /* Glassmorphism */
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+
+      /* 3D Properties */
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateY(0deg);
+      transition: transform 0.1s ease-out;
+      position: relative;
+    }
+
+    /* --- LOGO STYLES (UPDATED) --- */
+    .logo-img {
+        width: 150px; /* Made slightly wider for your logo */
+        height: auto;
+        margin-bottom: 20px;
+        border-radius: 15px; /* Rounds the corners of the white background */
+        
+        /* 3D Pop Effect */
+        transform: translateZ(60px); 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Shadow for depth */
+    }
+
+    /* 3D Depth for Child Elements */
+    h2 {
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transform: translateZ(50px); 
+        text-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    }
+
+    form {
+        transform: translateZ(30px);
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      margin: 12px 0;
+      outline: none;
+      color: white;
+      font-size: 15px;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    input:focus {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #ffe066;
+        transform: scale(1.05);
+    }
+
+    button {
+      width: 100%;
+      background: #ffe066; 
+      color: #333;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: 0.3s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      transform: translateZ(40px);
+    }
+
+    button:hover { 
+        background: #fab005; 
+        box-shadow: 0 0 20px #ffe066;
+    }
+
+    .footer-text {
+        margin-top: 30px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        transform: translateZ(20px);
+    }
+
+    a { 
+        color: #ffe066; 
+        text-decoration: none; 
+        font-weight: 600;
+        display: inline-block;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #fff;
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+        .box {
+            transform: none !important;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box" id="tilt-box">
+    <img src="{% static 'images/SmartHome.jpg' %}" alt="SmartHome Logo" class="logo-img">
+
+    <h2>SmartHome Login</h2>
+    
+    <form method="POST">
+      {% csrf_token %}
+      
+      <input type="text" name="username" placeholder="Username" required autocomplete="username">
+      <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+      
+      <button type="submit">Login</button>
+    </form>
+    
+    <p class="footer-text">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+  </div>
+
+  <script>
+    const box = document.getElementById("tilt-box");
+
+    document.addEventListener("mousemove", (e) => {
+        const x = (window.innerWidth / 2 - e.pageX) / 25; 
+        const y = (window.innerHeight / 2 - e.pageY) / 25;
+        box.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+
+    document.addEventListener("mouseleave", () => {
+        box.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    });
+  </script>
+
+</body>
+</html>

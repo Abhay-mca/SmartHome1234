@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify OTP</title>
+</head>
+<body style="text-align:center; margin-top:80px; font-family:Poppins;">
+
+    <h2>Enter OTP</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="otp" maxlength="6" placeholder="6-digit OTP" required
+         style="padding:10px; width:200px; border-radius:8px;"><br><br>
+
+        <button type="submit"
+         style="padding:10px 20px; background:#ffe066; border:none; border-radius:8px; cursor:pointer;">
+         Verify OTP
+        </button>
+    </form>
+
+</body>
+</html>
