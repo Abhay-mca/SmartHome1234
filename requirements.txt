@@ -1,0 +1,10 @@
+django
+djangorestframework
+mysqlclient
+PyMySQL
+pillow
+python-dotenv
+sqlparse
+asgiref
+gunicorn
+whitenoise
